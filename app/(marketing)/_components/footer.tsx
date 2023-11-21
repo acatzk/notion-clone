@@ -1,9 +1,9 @@
 import React, { FC } from 'react'
-import { Button } from '~/components/ui/button'
 
 import Logo from './logo'
+import { Button } from '~/components/ui/button'
 
-type Props = {}
+type Props = Record<string, unknown>
 
 const Footer: FC<Props> = (): JSX.Element => {
   return (
