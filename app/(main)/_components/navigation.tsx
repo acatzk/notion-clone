@@ -4,6 +4,7 @@ import { ChevronsLeft, MenuIcon } from 'lucide-react'
 import React, { ElementRef, FC, MouseEvent, useEffect, useRef, useState } from 'react'
 
 import { cn } from '~/lib/utils'
+import UserItem from './user-item'
 
 type Props = {}
 
@@ -106,7 +107,7 @@ const Navigation: FC<Props> = (): JSX.Element => {
           <ChevronsLeft className="h-6 w-6" />
         </div>
         <div>
-          <p>Action items</p>
+          <UserItem />
         </div>
         <div className="mt-4">
           <p>Documents</p>
