@@ -1,3 +1,4 @@
+import { Toaster } from 'sonner'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import React, { FC, ReactNode } from 'react'
@@ -43,6 +44,7 @@ const RootLayout: FC<RootTypeProps> = ({ children }): JSX.Element => {
             disableTransitionOnChange
             storageKey="notion-theme"
           >
+            <Toaster position="bottom-center" />
             {children}
           </ThemeProvider>
         </ConvexClientProvider>
