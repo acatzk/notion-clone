@@ -1,7 +1,8 @@
 import React, { FC } from 'react'
 
-import Logo from './logo'
 import { Button } from '~/components/ui/button'
+
+import Logo from './logo'
 
 type Props = Record<string, unknown>
 

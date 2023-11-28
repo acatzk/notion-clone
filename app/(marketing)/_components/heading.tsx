@@ -4,10 +4,10 @@ import Link from 'next/link'
 import React, { FC } from 'react'
 import { ArrowRight } from 'lucide-react'
 import { useConvexAuth } from 'convex/react'
+import { SignInButton } from '@clerk/clerk-react'
 
 import { Button } from '~/components/ui/button'
 import { Spinner } from '~/components/spinner'
-import { SignInButton } from '@clerk/clerk-react'
 
 type Props = Record<string, unknown>
 

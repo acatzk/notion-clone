@@ -5,12 +5,13 @@ import React, { FC } from 'react'
 import { useConvexAuth } from 'convex/react'
 import { SignInButton, UserButton } from '@clerk/clerk-react'
 
-import Logo from './logo'
 import { cn } from '~/lib/utils'
 import { Spinner } from '~/components/spinner'
 import { Button } from '~/components/ui/button'
 import ModeToggle from '~/components/mode-toggle'
 import { useScrollTop } from '~/hooks/use-scroll-top'
+
+import Logo from './logo'
 
 type Props = Record<string, unknown>
 
