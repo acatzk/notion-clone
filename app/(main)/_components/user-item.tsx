@@ -15,7 +15,7 @@ import {
 
 type Props = {}
 
-const UserItem: FC<Props> = (): JSX.Element => {
+export const UserItem: FC<Props> = (): JSX.Element => {
   const { user } = useUser()
 
   return (
@@ -57,4 +57,3 @@ const UserItem: FC<Props> = (): JSX.Element => {
     </DropdownMenu>
   )
 }
-export default UserItem

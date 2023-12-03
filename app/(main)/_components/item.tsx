@@ -1,10 +1,15 @@
 'use client'
 
-import React, { FC } from 'react'
-import { ChevronDown, ChevronRight, LucideIcon } from 'lucide-react'
+import { toast } from 'sonner'
+import React, { MouseEvent } from 'react'
+import { useMutation } from 'convex/react'
+import { useRouter } from 'next/navigation'
+import { ChevronDown, ChevronRight, LucideIcon, PlusIcon } from 'lucide-react'
 
 import { cn } from '~/lib/utils'
+import { api } from '~/convex/_generated/api'
 import { Id } from '~/convex/_generated/dataModel'
+import { Skeleton } from '~/components/ui/skeleton'
 
 type Props = {
   id?: Id<'documents'>
@@ -19,7 +24,7 @@ type Props = {
   icon: LucideIcon
 }
 
-const Item: FC<Props> = (props): JSX.Element => {
+export const Item = (props: Props): JSX.Element => {
   const {
     id,
     documentIcon,
@@ -32,7 +37,35 @@ const Item: FC<Props> = (props): JSX.Element => {
     onClick,
     icon: Icon
   } = props
+  const router = useRouter()
   const ChevronIcon = expanded ? ChevronDown : ChevronRight
+
+  const create = useMutation(api.documents.create)
+
+  const handleExpand = (e: MouseEvent<HTMLDivElement, MouseEvent>): void => {
+    e.stopPropagation()
+    onExpand?.()
+  }
+
+  const onCreate = (e: MouseEvent<HTMLDivElement, MouseEvent>): void => {
+    e.stopPropagation()
+    if (!id) return
+
+    const promise = create({
+      title: 'Untitled',
+      parentDocument: id
+    }).then((documentId) => {
+      if (!expanded) {
+        onExpand?.()
+      }
+      // router.push(`/documents/${documentId}`)
+    })
+    toast.promise(promise, {
+      loading: 'Creating a new note...',
+      success: 'New note created!',
+      error: 'Failed to create a new note.'
+    })
+  }
 
   return (
     <div
@@ -51,7 +84,7 @@ const Item: FC<Props> = (props): JSX.Element => {
         <div
           role="button"
           className="h-full rounded-sm hover:bg-neutral-300 dark:bg-neutral-600 mr-1"
-          onClick={() => {}}
+          onClick={handleExpand as any}
         >
           <ChevronIcon className="h-4 w-4 shrink-0 text-muted-foreground/50" />
         </div>
@@ -67,8 +100,31 @@ const Item: FC<Props> = (props): JSX.Element => {
           <span>ctrl</span>K
         </kbd>
       )}
+      {!!id && (
+        <div className="ml-auto flex items-center gap-x-2">
+          <div
+            role="button"
+            onClick={onCreate as any}
+            className="opacity-0 group-hover:opacity-100 h-full ml-auto rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600"
+          >
+            <PlusIcon className="h-4 w-4 text-muted-foreground" />
+          </div>
+        </div>
+      )}
     </div>
   )
 }
 
-export default Item
+Item.Skeleton = function ItemSkeleton({ level }: { level?: number }) {
+  return (
+    <div
+      style={{
+        paddingLeft: level ? `${level * 12 + 25}px` : '12px'
+      }}
+      className="flex gap-x-2 py-[3px]"
+    >
+      <Skeleton className="h-4 w-4" />
+      <Skeleton className="h-4 w-[30%]" />
+    </div>
+  )
+}
