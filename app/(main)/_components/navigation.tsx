@@ -8,6 +8,7 @@ import { ChevronsLeft, MenuIcon, Plus, PlusCircle, Search, Settings, Trash } fro
 import { cn } from '~/lib/utils'
 import { api } from '~/convex/_generated/api'
 import { useSearch } from '~/hooks/use-search'
+import { useSettings } from '~/hooks/use-settings'
 import { Popover, PopoverContent, PopoverTrigger } from '~/components/ui/popover'
 
 import { Item } from './item'
@@ -17,6 +18,7 @@ import { DocumentList } from './document-list'
 
 const Navigation = (): JSX.Element => {
   const search = useSearch()
+  const settings = useSettings()
   const pathname = usePathname()
   const isMobile = useMediaQuery('(max-width: 768px)')
   const create = useMutation(api.documents.create)
@@ -129,7 +131,7 @@ const Navigation = (): JSX.Element => {
         <div>
           <UserItem />
           <Item onClick={search.onOpen} label="Search" icon={Search} isSearch />
-          <Item onClick={() => {}} label="Settings" icon={Settings} />
+          <Item onClick={settings.onOpen} label="Settings" icon={Settings} />
           <Item onClick={handleCreate} label="New page" icon={PlusCircle} />
         </div>
         <div className="mt-4">

@@ -92,12 +92,15 @@ const TrashBox: FC<Props> = (): JSX.Element => {
               <div
                 onClick={(e: any) => onRestore(e, document._id)}
                 role="button"
-                className="rounded-sm p-2 hover:bg-neutral-200"
+                className="rounded-sm p-2 hover:bg-neutral-200 dark:hover:bg-neutral-600"
               >
                 <Undo className="h-4 w-4 text-muted-foreground" />
               </div>
               <ConfirmModal onConfirm={(e?: any) => onRemove(e, document._id)}>
-                <div className="rounded-sm p-2 hover:bg-neutral-200" role="button">
+                <div
+                  className="rounded-sm p-2 hover:bg-neutral-200 dark:hover:bg-neutral-600"
+                  role="button"
+                >
                   <Trash className="h-4 w-4 text-muted-foreground" />
                 </div>
               </ConfirmModal>

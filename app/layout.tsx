@@ -5,6 +5,7 @@ import React, { FC, ReactNode } from 'react'
 
 import '~/styles/globals.css'
 import { ThemeProvider } from '~/components/providers/theme-provider'
+import { ModalProvider } from '~/components/providers/modal-providers'
 import { ConvexClientProvider } from '~/components/providers/convex-provider'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -45,6 +46,7 @@ const RootLayout: FC<RootTypeProps> = ({ children }): JSX.Element => {
             storageKey="notion-theme"
           >
             <Toaster position="bottom-center" />
+            <ModalProvider />
             {children}
           </ThemeProvider>
         </ConvexClientProvider>
