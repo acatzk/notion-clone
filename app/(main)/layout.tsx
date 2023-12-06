@@ -5,6 +5,8 @@ import { useConvexAuth } from 'convex/react'
 import React, { FC, ReactNode } from 'react'
 
 import { Spinner } from '~/components/spinner'
+import { SearchCommand } from '~/components/search-command'
+
 import Navigation from './_components/navigation'
 
 type Props = {
@@ -29,7 +31,10 @@ const MainLayout: FC<Props> = ({ children }): JSX.Element => {
   return (
     <div className="h-full flex dark:bg-[#1F1F1F]">
       <Navigation />
-      <main className="flex-1 h-full overflow-y-auto">{children}</main>
+      <main className="flex-1 h-full overflow-y-auto">
+        <SearchCommand />
+        {children}
+      </main>
     </div>
   )
 }
