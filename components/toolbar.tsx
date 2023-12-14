@@ -5,6 +5,7 @@ import React, { ElementRef, FC, KeyboardEvent, useRef, useState } from 'react'
 
 import { api } from '~/convex/_generated/api'
 import { Doc } from '~/convex/_generated/dataModel'
+import { useConverImage } from '~/hooks/use-cover-image'
 
 import { Button } from './ui/button'
 import { IconPicker } from './icon-picker'
@@ -21,6 +22,8 @@ const Toolbar: FC<Props> = ({ initialData, preview }): JSX.Element => {
 
   const update = useMutation(api.documents.update)
   const removeIcon = useMutation(api.documents.removeIcon)
+
+  const coverImage = useConverImage()
 
   const enableInput = (): void => {
     if (preview) return
@@ -94,7 +97,7 @@ const Toolbar: FC<Props> = ({ initialData, preview }): JSX.Element => {
             className="text-muted-foreground text-xs"
             variant="outline"
             size="sm"
-            onClick={() => {}}
+            onClick={coverImage.onOpen}
           >
             <ImageIcon className="w-4 h-4 mr-2" />
             Add cover

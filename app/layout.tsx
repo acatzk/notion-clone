@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 import React, { FC, ReactNode } from 'react'
 
 import '~/styles/globals.css'
+import { EdgeStoreProvider } from '~/lib/edgestore'
 import { ThemeProvider } from '~/components/providers/theme-provider'
 import { ModalProvider } from '~/components/providers/modal-providers'
 import { ConvexClientProvider } from '~/components/providers/convex-provider'
@@ -38,17 +39,19 @@ const RootLayout: FC<RootTypeProps> = ({ children }): JSX.Element => {
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <ConvexClientProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-            storageKey="notion-theme"
-          >
-            <Toaster position="bottom-center" />
-            <ModalProvider />
-            {children}
-          </ThemeProvider>
+          <EdgeStoreProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+              storageKey="notion-theme"
+            >
+              <Toaster position="bottom-center" />
+              <ModalProvider />
+              {children}
+            </ThemeProvider>
+          </EdgeStoreProvider>
         </ConvexClientProvider>
       </body>
     </html>

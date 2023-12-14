@@ -4,7 +4,7 @@ import { useTheme } from 'next-themes'
 import React, { FC, ReactNode } from 'react'
 import EmojiPicker, { Theme } from 'emoji-picker-react'
 
-import { Popover, PopoverContent, PopoverTrigger } from '~/components/ui/Popover'
+import { Popover, PopoverContent, PopoverTrigger } from '~/components/ui/popover'
 
 type Props = {
   onChange: (icon: string) => void
