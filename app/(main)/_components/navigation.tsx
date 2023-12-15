@@ -1,8 +1,8 @@
 import { toast } from 'sonner'
 import { useMutation } from 'convex/react'
 import { useMediaQuery } from 'usehooks-ts'
-import { useParams, usePathname } from 'next/navigation'
-import React, { ElementRef, FC, MouseEvent, useEffect, useRef, useState } from 'react'
+import { useParams, usePathname, useRouter } from 'next/navigation'
+import React, { ElementRef, MouseEvent, useEffect, useRef, useState } from 'react'
 import { ChevronsLeft, MenuIcon, Plus, PlusCircle, Search, Settings, Trash } from 'lucide-react'
 
 import { cn } from '~/lib/utils'
@@ -20,6 +20,7 @@ import { DocumentList } from './document-list'
 const Navigation = (): JSX.Element => {
   const search = useSearch()
   const params = useParams()
+  const router = useRouter()
   const settings = useSettings()
   const pathname = usePathname()
   const isMobile = useMediaQuery('(max-width: 768px)')
@@ -101,7 +102,8 @@ const Navigation = (): JSX.Element => {
   const handleCreate = (): void => {
     const promise = create({
       title: 'Untitled'
-    })
+    }).then((documentId) => router.push(`/documents/${documentId}`))
+
     toast.promise(promise, {
       loading: 'Creating a new note...',
       success: 'New note created!',

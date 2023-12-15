@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { toast } from 'sonner'
 import React, { FC } from 'react'
 import { useMutation } from 'convex/react'
+import { useRouter } from 'next/navigation'
 import { useUser } from '@clerk/clerk-react'
 import { PlusCircleIcon } from 'lucide-react'
 
@@ -13,11 +14,14 @@ import { Button } from '~/components/ui/button'
 type Props = Record<string, unknown>
 
 const DocumentsPage: FC<Props> = (): JSX.Element => {
+  const router = useRouter()
   const { user } = useUser()
   const create = useMutation(api.documents.create)
 
   const onCreate = () => {
-    const promise = create({ title: 'Untitled' })
+    const promise = create({ title: 'Untitled' }).then((documentId) =>
+      router.push(`/documents/${documentId}`)
+    )
 
     toast.promise(promise, {
       loading: 'Creating a new note...',

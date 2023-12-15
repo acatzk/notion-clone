@@ -1,5 +1,5 @@
+import React from 'react'
 import Image from 'next/image'
-import React, { FC } from 'react'
 import { useMutation } from 'convex/react'
 import { ImageIcon, X } from 'lucide-react'
 import { useParams } from 'next/navigation'
@@ -9,6 +9,7 @@ import { api } from '~/convex/_generated/api'
 import { useEdgeStore } from '~/lib/edgestore'
 import { Button } from '~/components/ui/button'
 import { Id } from '~/convex/_generated/dataModel'
+import { Skeleton } from '~/components/ui/skeleton'
 import { useConverImage } from '~/hooks/use-cover-image'
 
 type Props = {
@@ -16,7 +17,7 @@ type Props = {
   preview?: boolean
 }
 
-export const Cover: FC<Props> = ({ url, preview }): JSX.Element => {
+export const Cover = ({ url, preview }: Props): JSX.Element => {
   const params = useParams()
   const coverImage = useConverImage()
   const { edgestore } = useEdgeStore()
@@ -60,4 +61,8 @@ export const Cover: FC<Props> = ({ url, preview }): JSX.Element => {
       )}
     </div>
   )
+}
+
+Cover.Skeleton = function CoverSkeleton() {
+  return <Skeleton className="w-full h-[12vh]" />
 }
