@@ -2,7 +2,7 @@
 
 import React, { FC } from 'react'
 
-import { Label } from '~/components/ui/Label'
+import { Label } from '~/components/ui/label'
 import ModeToggle from '~/components/mode-toggle'
 import { useSettings } from '~/hooks/use-settings'
 import { Dialog, DialogHeader, DialogContent } from '~/components/ui/dialog'

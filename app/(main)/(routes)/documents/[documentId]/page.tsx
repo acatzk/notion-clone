@@ -1,7 +1,7 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import React, { FC, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { useMutation, useQuery } from 'convex/react'
 
 import Toolbar from '~/components/toolbar'
@@ -16,8 +16,8 @@ type Props = {
   }
 }
 
-const DocumentIdPage: FC<Props> = ({ params }): JSX.Element => {
-  const Editor = useMemo(() => dynamic(() => import('~/components/Editor'), { ssr: false }), [])
+const DocumentIdPage = ({ params }: Props): JSX.Element => {
+  const Editor = useMemo(() => dynamic(() => import('~/components/editor'), { ssr: false }), [])
 
   const document = useQuery(api.documents.getById, {
     documentId: params.documentId
@@ -25,7 +25,7 @@ const DocumentIdPage: FC<Props> = ({ params }): JSX.Element => {
 
   const update = useMutation(api.documents.update)
 
-  const onChange = (content: string) => {
+  const onChange = (content: string): void => {
     update({
       id: params.documentId,
       content

@@ -16,8 +16,8 @@ type Props = {
   }
 }
 
-const DocumentIdPage: FC<Props> = ({ params }): JSX.Element => {
-  const Editor = useMemo(() => dynamic(() => import('~/components/Editor'), { ssr: false }), [])
+const PreviewDocumentIdPage: FC<Props> = ({ params }): JSX.Element => {
+  const Editor = useMemo(() => dynamic(() => import('~/components/editor'), { ssr: false }), [])
 
   const document = useQuery(api.documents.getById, {
     documentId: params.documentId
@@ -63,4 +63,4 @@ const DocumentIdPage: FC<Props> = ({ params }): JSX.Element => {
   )
 }
 
-export default DocumentIdPage
+export default PreviewDocumentIdPage

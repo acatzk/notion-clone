@@ -45,7 +45,7 @@ export const UserItem: FC<Props> = (): JSX.Element => {
               </Avatar>
             </div>
             <div className="space-y-1">
-              <p className="text-sm line-clamp-1">{user?.fullName}&apos;'s Notion</p>
+              <p className="text-sm line-clamp-1">{user?.fullName}&apos;s Notion</p>
             </div>
           </div>
         </div>

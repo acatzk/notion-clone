@@ -11,14 +11,12 @@ import { PlusCircleIcon } from 'lucide-react'
 import { api } from '~/convex/_generated/api'
 import { Button } from '~/components/ui/button'
 
-type Props = Record<string, unknown>
-
-const DocumentsPage: FC<Props> = (): JSX.Element => {
+const DocumentsPage = (): JSX.Element => {
   const router = useRouter()
   const { user } = useUser()
   const create = useMutation(api.documents.create)
 
-  const onCreate = () => {
+  const onCreate = (): void => {
     const promise = create({ title: 'Untitled' }).then((documentId) =>
       router.push(`/documents/${documentId}`)
     )
